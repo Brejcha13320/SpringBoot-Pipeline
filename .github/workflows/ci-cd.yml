@@ -21,6 +21,9 @@ jobs:
         with:
           java-version: '21'
 
+      - name: Grant execute permission to Gradlew
+        run: chmod +x gradlew
+
       - name: Build with Gradlew
         run: ./gradlew clean build
 
