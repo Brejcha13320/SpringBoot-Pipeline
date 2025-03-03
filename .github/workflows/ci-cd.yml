@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Functional Tests
         run: ./gradlew check
-        
+
       - name: Debug Secrets
         run: |
           echo "DOCKER_HUB_USERNAME is set: ${{ secrets.DOCKER_HUB_USERNAME != '' }}"
@@ -49,6 +49,10 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/demo-java:latest
+
+      - name: Authenticate with Personal Access Token
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Brejcha13320/SpringBoot-Pipeline.git
 
       - name: Create Git Tag
         id: tag
