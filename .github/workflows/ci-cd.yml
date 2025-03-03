@@ -50,9 +50,11 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/demo-java:latest
 
-      - name: Authenticate with Personal Access Token
+      - name: Configure Git credentials
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Brejcha13320/SpringBoot-Pipeline.git
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Create Git Tag
         id: tag
